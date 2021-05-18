@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "557462368353",
+    "project_id": "gosh-foods",
+    "storage_bucket": "gosh-foods.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557462368353:android:65950f621a760758e93a20",
+        "android_client_info": {
+          "package_name": "com.goosh.delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557462368353-i83pqtfrmpkarljhgh8mak2eenaeo0eg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApQdHrvw1pK2dwCD3wT3uJJPqNKti2gpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557462368353-i83pqtfrmpkarljhgh8mak2eenaeo0eg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
