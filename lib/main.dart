@@ -10,10 +10,11 @@ import 'package:delivery/pages/cart/cart.dart';
 import 'package:delivery/pages/profile/profile.dart';
 
 import 'package:delivery/pages/meal_detail/meal_detail.dart';
+import 'package:delivery/pages/payment/payment.dart';
 
 const HomeRoute = "/";
 const MealDetailRoute = "/meal_detail";
-
+const PaymentRoute = "/payment";
 void main() {
   runApp(MyApp());
 }
@@ -74,7 +75,9 @@ class MyApp extends StatelessWidget {
         case MealDetailRoute:
           screen = MealDetail(arguments['id']);
           break;
-
+        case PaymentRoute:
+          screen = Payment();
+          break;
         default:
           return null;
       }

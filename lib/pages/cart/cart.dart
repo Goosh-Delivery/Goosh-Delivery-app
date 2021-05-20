@@ -207,7 +207,7 @@ class _CartViewState extends State<CartView> {
   }
 
   _checkOut(BuildContext context) {
-    Navigator.pushNamed(context, MealDetailRoute);
+    Navigator.pushNamed(context, PaymentRoute);
   }
 
   _returnHome(BuildContext context) {

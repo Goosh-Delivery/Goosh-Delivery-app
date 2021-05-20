@@ -1,4 +1,3 @@
-import 'package:delivery/pages/common/theme.dart';
 import 'package:flutter/material.dart';
 
 class NumericStepButton extends StatefulWidget {
@@ -18,8 +17,7 @@ class NumericStepButton extends StatefulWidget {
 }
 
 class _NumericStepButtonState extends State<NumericStepButton> {
-
-  int counter= 0;
+  int counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,9 @@ class _NumericStepButtonState extends State<NumericStepButton> {
           Container(
             decoration: BoxDecoration(
               color: Colors.grey[300],
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15)),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  bottomLeft: Radius.circular(15)),
             ),
             padding: EdgeInsets.zero,
             child: IconButton(
@@ -67,7 +67,9 @@ class _NumericStepButtonState extends State<NumericStepButton> {
           Container(
             decoration: BoxDecoration(
               color: Colors.grey[300],
-              borderRadius: BorderRadius.only(topRight: Radius.circular(15), bottomRight: Radius.circular(15)),
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(15),
+                  bottomRight: Radius.circular(15)),
             ),
             child: IconButton(
               icon: Icon(
