@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery/pages/common/head_title.dart';
 import 'package:delivery/pages/home/food_card.dart';
 import 'package:delivery/pages/home/nearby_food_card.dart';
@@ -9,6 +10,7 @@ import 'navbar.dart';
 
 class Home extends StatelessWidget {
   static int selectedFoodCategoryId = 1;
+
   @override
   Widget build(BuildContext context) {
     final allFoodCategory = FoodCatagory.fetchAll();
@@ -21,19 +23,31 @@ class Home extends StatelessWidget {
           children: [
             NavBar(),
             //list of food category
-            FoodCategoryList(foodCategory, allFoodCategory,selectedFoodCategoryId),
+            // FoodCategoryList(foodCategory, allFoodCategory,selectedFoodCategoryId),
             HeadTitle("Popular Items"),
             //list of food category
             Container(
               padding: EdgeInsets.zero,
               margin: EdgeInsets.symmetric(vertical: 10),
               height: 315,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: foods.length,
-                itemBuilder: (context, index) {
-                  return FoodCard(foods, index);
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance.collection("Food")
+                    .snapshots(),
+                builder: (context, snapshots) {
+                  if (snapshots.hasData) {
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshots.data.docs.length,
+                      itemBuilder: (context, index) {
+                        return FoodCard(foods, index);
+                      },
+                    );
+                  }
+                  else {
+                    return Text("no one");
+                  }
                 },
+                // child:
               ),
             ),
             HeadTitle("Near By"),

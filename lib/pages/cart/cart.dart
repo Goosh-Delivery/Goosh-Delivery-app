@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery/main.dart';
 import 'package:delivery/pages/cart/cart_food_card.dart';
 import 'package:delivery/pages/common/head_title.dart';
@@ -66,16 +67,27 @@ class CartView extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         margin: EdgeInsets.symmetric(vertical: 10),
                         height: 270,
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: carts.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                CartFoodCard(carts[index]),
-                              ],
-                            );
+                        child: StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection("Cart")
+                              .snapshots(),
+                          builder: (context, snapshots) {
+                            if (snapshots.hasData) {
+                              return ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                itemCount: snapshots.data.docs.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      CartFoodCard(carts[index]),
+                                    ],
+                                  );
+                                },
+                              );
+                            } else
+                              return Text("Loading");
                           },
+                          // child:
                         ),
                       ),
                       Padding(
@@ -85,25 +97,69 @@ class CartView extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Subtotal", style: TextStyle(color: Colors.grey[600], fontSize:16,),),
-                                Text("270 ETB", style: TextStyle(color: Colors.grey[600], fontSize:16, ),),
+                                Text(
+                                  "Subtotal",
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  "270 ETB",
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ],
                             ),
-                            SizedBox(height: 10,),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Delivery", style: TextStyle(color: Colors.grey[600], fontSize:16, ),),
-                                Text("50 ETB", style: TextStyle(color: Colors.grey[600], fontSize:16, ),),
+                                Text(
+                                  "Delivery",
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  "50 ETB",
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ],
                             ),
-                            SizedBox(height: 10,),
-                            Divider(color: Colors.grey,),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Total", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize:16, ),),
-                                Text("320 ETB", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize:16, ),),
+                                Text(
+                                  "Total",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  "320 ETB",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ],
                             ),
                           ],
@@ -123,6 +179,7 @@ class CartView extends StatelessWidget {
   _goToFoodDetail(BuildContext context, int foodId) {
     Navigator.pushNamed(context, MealDetailRoute, arguments: {"id": foodId});
   }
+
   _returnHome(BuildContext context) {
     Navigator.pushNamed(context, HomeRoute);
   }

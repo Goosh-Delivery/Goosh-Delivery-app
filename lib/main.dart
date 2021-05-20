@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:floating_navbar/floating_navbar.dart';
 import 'package:floating_navbar/floating_navbar_item.dart';
 import 'package:line_icons/line_icons.dart';
@@ -14,7 +15,12 @@ import 'package:delivery/pages/meal_detail/meal_detail.dart';
 const HomeRoute = "/";
 const MealDetailRoute = "/meal_detail";
 
-void main() {
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  // FirebaseApp defaultApp = await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -23,6 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         title: 'Goosh Foods',
         onGenerateRoute: _routes(),
         theme: ThemeData(
