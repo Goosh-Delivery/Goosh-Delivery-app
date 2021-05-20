@@ -5,7 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:delivery/pages/common/theme.dart';
 import 'package:line_icons/line_icons.dart';
 
-class CartView extends StatelessWidget {
+class CartView extends StatefulWidget {
+  @override
+  _CartViewState createState() => _CartViewState();
+}
+
+class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     final carts = Cart.fetchFoodCart(1);
@@ -55,7 +60,7 @@ class CartView extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Color(0xffecebeb),
