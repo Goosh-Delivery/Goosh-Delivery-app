@@ -8,7 +8,57 @@ class Payment extends StatefulWidget {
   _PaymentState createState() => _PaymentState();
 }
 
+class PaymentMethod {
+  String text;
+  int index;
+  bool selected;
+
+  PaymentMethod({this.text, this.index, this.selected});
+}
+
 class _PaymentState extends State<Payment> {
+  int _value2 = 0;
+  List<PaymentMethod> _group = [
+    PaymentMethod(text: "Hello Cash", index: 1, selected: true),
+    PaymentMethod(text: "Sahay", index: 2, selected: false),
+    PaymentMethod(text: "Cash", index: 3, selected: false),
+  ];
+
+  Widget makeRadioTiles() {
+    List<Widget> list = [];
+
+    for (int i = 0; i < _group.length; i++) {
+      list.add(new RadioListTile(
+        value: _group[i].index,
+        groupValue: _value2,
+        selected: _group[i].selected,
+        onChanged: (val) {
+          setState(() {
+            for (int i = 0; i < _group.length; i++) {
+              _group[i].selected = false;
+            }
+            _value2 = val;
+            _group[i].selected = true;
+          });
+        },
+        activeColor: secondaryColor,
+        controlAffinity: ListTileControlAffinity.trailing,
+        title: new Text(
+          ' ${_group[i].text}',
+          style: TextStyle(
+              color: _group[i].selected ? Colors.black : Colors.grey,
+              fontWeight:
+              _group[i].selected ? FontWeight.bold : FontWeight.normal),
+        ),
+      ));
+    }
+
+    Column column = new Column(
+      children: list,
+    );
+    return column;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +117,46 @@ class _PaymentState extends State<Payment> {
                             topRight: Radius.circular(40)),
                       ),
                       child: Column(
-                        children: [],
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text("Please Choose one of the options to pay", style: TextStyle(fontSize: 17, color: Colors.grey[500]),),
+                          ),
+                          Column(
+                            children: <Widget>[makeRadioTiles()],
+                          ),
+                          SizedBox(height: 30,),
+                          TextButton(
+                            onPressed: () {
+                              _checkOut(context);
+                            },
+                            child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Continue",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                )),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        side: BorderSide(color: secondaryColor))),
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                    secondaryColor),
+                                foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                                padding:
+                                MaterialStateProperty.all<EdgeInsetsGeometry>(
+                                    EdgeInsets.symmetric(
+                                      vertical: 18,
+                                      horizontal: 100,
+                                    ))),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -76,11 +165,13 @@ class _PaymentState extends State<Payment> {
             ),
           ),
         ),
-      ],
     );
   }
-
-  _returnHome(BuildContext context) {
-    Navigator.pushNamed(context, HomeRoute);
+  _checkOut(BuildContext context) {
+    Navigator.pushNamed(context, checkOutRoute);
   }
+  _returnHome(BuildContext context) {
+    Navigator.pushNamed(context, cartRoute);
+  }
+
 }

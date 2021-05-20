@@ -1,3 +1,4 @@
+import 'package:delivery/pages/checkout/checkout.dart';
 import 'package:floating_navbar/floating_navbar.dart';
 import 'package:floating_navbar/floating_navbar_item.dart';
 import 'package:line_icons/line_icons.dart';
@@ -13,8 +14,11 @@ import 'package:delivery/pages/meal_detail/meal_detail.dart';
 import 'package:delivery/pages/payment/payment.dart';
 
 const HomeRoute = "/";
+const cartRoute = "/cart";
 const MealDetailRoute = "/meal_detail";
 const PaymentRoute = "/payment";
+const checkOutRoute = "/checkout";
+
 void main() {
   runApp(MyApp());
 }
@@ -77,6 +81,12 @@ class MyApp extends StatelessWidget {
           break;
         case PaymentRoute:
           screen = Payment();
+          break;
+        case checkOutRoute:
+          screen = CheckOut();
+          break;
+        case cartRoute:
+          screen = CartView();
           break;
         default:
           return null;

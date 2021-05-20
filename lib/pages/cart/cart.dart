@@ -167,7 +167,7 @@ class _CartViewState extends State<CartView> {
                       ),
                       TextButton(
                         onPressed: () {
-                          _checkOut(context);
+                          _payment(context);
                         },
                         child: Container(
                             width: MediaQuery.of(context).size.width,
@@ -206,7 +206,7 @@ class _CartViewState extends State<CartView> {
     );
   }
 
-  _checkOut(BuildContext context) {
+  _payment(BuildContext context) {
     Navigator.pushNamed(context, PaymentRoute);
   }
 
