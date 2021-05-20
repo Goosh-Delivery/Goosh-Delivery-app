@@ -1,6 +1,5 @@
 import 'package:delivery/main.dart';
 import 'package:delivery/pages/cart/cart_food_card.dart';
-import 'package:delivery/pages/common/head_title.dart';
 import 'package:delivery/models/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:delivery/pages/common/theme.dart';
@@ -22,8 +21,8 @@ class CartView extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(
                   left: 20,
-                  top: 20,
-                  bottom: 20,
+                  top: 15,
+                  bottom: 15,
                 ),
                 child: Stack(
                   alignment: FractionalOffset.topLeft,
@@ -42,7 +41,12 @@ class CartView extends StatelessWidget {
                       padding: EdgeInsets.only(bottom: 5),
                       child: Text(
                         "Cart",
-                        style: AppBarTextStyle,
+                        style: TextStyle(
+                          fontFamily: FontNameDefault,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 26,
+                          color: textColor,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     )
@@ -64,8 +68,7 @@ class CartView extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.zero,
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        height: 270,
+                        height: 250,
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           itemCount: carts.length,
@@ -79,36 +82,114 @@ class CartView extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 0),
                         child: Column(
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Subtotal", style: TextStyle(color: Colors.grey[600], fontSize:16,),),
-                                Text("270 ETB", style: TextStyle(color: Colors.grey[600], fontSize:16, ),),
+                                Text(
+                                  "Subtotal",
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  "270 ETB",
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ],
                             ),
-                            SizedBox(height: 10,),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Delivery", style: TextStyle(color: Colors.grey[600], fontSize:16, ),),
-                                Text("50 ETB", style: TextStyle(color: Colors.grey[600], fontSize:16, ),),
+                                Text(
+                                  "Delivery",
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  "50 ETB",
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ],
                             ),
-                            SizedBox(height: 10,),
-                            Divider(color: Colors.grey,),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Total", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize:16, ),),
-                                Text("320 ETB", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize:16, ),),
+                                Text(
+                                  "Total",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  "320 ETB",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ],
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          _checkOut(context);
+                        },
+                        child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Check out",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            )),
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    side: BorderSide(color: secondaryColor))),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                secondaryColor),
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            padding:
+                                MaterialStateProperty.all<EdgeInsetsGeometry>(
+                                    EdgeInsets.symmetric(
+                              vertical: 18,
+                              horizontal: 100,
+                            ))),
+                      ),
                     ],
                   ),
                 ),
@@ -120,9 +201,10 @@ class CartView extends StatelessWidget {
     );
   }
 
-  _goToFoodDetail(BuildContext context, int foodId) {
-    Navigator.pushNamed(context, MealDetailRoute, arguments: {"id": foodId});
+  _checkOut(BuildContext context) {
+    Navigator.pushNamed(context, MealDetailRoute);
   }
+
   _returnHome(BuildContext context) {
     Navigator.pushNamed(context, HomeRoute);
   }

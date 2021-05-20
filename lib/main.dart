@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
               selectedIconColor: secondaryColor,
               hapticFeedback: false,
               showTitle: true,
-              horizontalPadding: 50,
+              horizontalPadding: 20,
               cardWidth: 100,
               items: [
                 FloatingNavBarItem(
