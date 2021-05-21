@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery/main.dart';
+import 'package:delivery/models/cart_item.dart';
 import 'package:delivery/pages/cart/cart_food_card.dart';
 import 'package:delivery/models/cart.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,9 @@ class CartView extends StatefulWidget {
 class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
-    final carts = Cart.fetchFoodCart(1);
+    // final carts = Cart.fetchFoodCart(1);
+    // user id
+    final uid = "12";
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -74,17 +78,40 @@ class _CartViewState extends State<CartView> {
                       Container(
                         padding: EdgeInsets.zero,
                         height: 250,
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: carts.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                CartFoodCard(carts[index]),
-                              ],
-                            );
-                          },
-                        ),
+                        child: StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection("Cart")
+                                .snapshots(),
+                            builder: (context, snapshots) {
+                              if (snapshots.hasData) {
+                                return ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: snapshots.data.docs.length,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        CartFoodCard(
+                                          CartItem(
+                                            snapshots.data.docs[index]
+                                                ["foodID"],
+                                            snapshots.data.docs[index]
+                                                ["foodName"],
+                                            snapshots.data.docs[index]["price"],
+                                            snapshots.data.docs[index]
+                                                ["amount"],
+                                            snapshots.data.docs[index]
+                                                ["foodPictureUrl"],
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else
+                                return Text("Loading");
+                            }
+                            // child:
+                            ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(

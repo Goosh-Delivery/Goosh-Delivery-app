@@ -3,11 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:delivery/models/food.dart';
 import 'package:delivery/pages/common/theme.dart';
 
-class FoodCard extends StatelessWidget {
+class FoodCard extends StatefulWidget {
   final Food _food;
   final int _index;
 
+
   FoodCard(this._food, this._index);
+
+  @override
+  _FoodCardState createState() => _FoodCardState();
+}
+
+class _FoodCardState extends State<FoodCard> {
+  String cartText = "Add to Cart";
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +38,7 @@ class FoodCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.network(
-                    _food.pictureUrl,
+                    widget._food.pictureUrl,
                       width: 100,
                       height: 100,
                       fit: BoxFit.cover,
@@ -58,14 +66,14 @@ class FoodCard extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  _food.foodName,
+                  widget._food.foodName,
                   style: BoldTextStyle,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  Food.trimText(_food.description, 120),
+                  Food.trimText(widget._food.description, 120),
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     fontSize: 12,
@@ -89,7 +97,7 @@ class FoodCard extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          _food.price.toString(),
+                          widget._food.price.toString(),
                           style: BoldTextStyle,
                         )
                       ],
@@ -105,7 +113,7 @@ class FoodCard extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          _food.rating.toString(),
+                          widget._food.rating.toString(),
                           style: BoldTextStyle,
                         )
                       ],
@@ -120,9 +128,13 @@ class FoodCard extends StatelessWidget {
             left: 32,
             child: TextButton(
               onPressed: () {
-                _goToFoodDetail(context, _food.foodId);
+                setState(() {
+                  this.cartText = "added";
+                });
+
+                // _goToFoodDetail(context, widget._food.foodId);
               },
-              child: Text("Add To Cart"),
+              child: Text(cartText),
               style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
