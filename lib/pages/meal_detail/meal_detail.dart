@@ -28,9 +28,6 @@ class MealDetail extends StatelessWidget {
               stream: FirebaseFirestore.instance.collection("Food").where("foodID" , isEqualTo: this._id).snapshots(),
               builder: (context, snapshots) {
                 if (snapshots.hasData) {
-                  Map<String, dynamic> data = snapshots.data.docs[0];
-
-                  print(snapshots.data.docs.toString());
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,13 +64,13 @@ class MealDetail extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               FoodDetailCard(Food(
-                                  data["foodID"],
-                                  data["foodName"],
-                                  data["description"],
-                                  data["price"],
-                                  data["rating"],
-                                  data["delivaryTime"],
-                                  data["pictureUrl"])),
+                                  snapshots.data.docs[0]["foodID"],
+                                  snapshots.data.docs[0]["foodName"],
+                                  snapshots.data.docs[0]["description"],
+                                  snapshots.data.docs[0]["price"],
+                                  snapshots.data.docs[0]["rating"],
+                                  snapshots.data.docs[0]["delivaryTime"],
+                                  snapshots.data.docs[0]["pictureUrl"])),
                               SizedBox(
                                 height: 40,
                               ),
