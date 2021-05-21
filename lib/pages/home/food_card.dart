@@ -4,10 +4,10 @@ import 'package:delivery/models/food.dart';
 import 'package:delivery/pages/common/theme.dart';
 
 class FoodCard extends StatelessWidget {
-  final List<Food> _foods;
+  final Food _food;
   final int _index;
 
-  FoodCard(this._foods, this._index);
+  FoodCard(this._food, this._index);
 
   @override
   Widget build(BuildContext context) {
@@ -29,25 +29,43 @@ class FoodCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
-                  child: Image.asset(
-                    _foods[_index].pictureUrl,
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
+                  child: Image.network(
+                    _food.pictureUrl,
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes
+                              : null,
+                        ),
+                      );
+                    },
                   ),
+                  // Image.asset(
+                  //   _food.pictureUrl,
+                  //   width: 100,
+                  //   height: 100,
+                  //   fit: BoxFit.cover,
+                  // ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  _foods[_index].foodName,
+                  _food.foodName,
                   style: BoldTextStyle,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  Food.trimText(_foods[_index].description, 120),
+                  Food.trimText(_food.description, 120),
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     fontSize: 12,
@@ -71,7 +89,7 @@ class FoodCard extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          _foods[_index].price.toString(),
+                          _food.price.toString(),
                           style: BoldTextStyle,
                         )
                       ],
@@ -87,7 +105,7 @@ class FoodCard extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          _foods[_index].rating.toString(),
+                          _food.rating.toString(),
                           style: BoldTextStyle,
                         )
                       ],
@@ -102,7 +120,7 @@ class FoodCard extends StatelessWidget {
             left: 32,
             child: TextButton(
               onPressed: () {
-                _goToFoodDetail(context, _foods[_index].foodId);
+                _goToFoodDetail(context, _food.foodId);
               },
               child: Text("Add To Cart"),
               style: ButtonStyle(

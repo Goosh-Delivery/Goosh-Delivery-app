@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delivery/models/food.dart';
 import 'package:delivery/pages/common/head_title.dart';
 import 'package:delivery/pages/home/food_card.dart';
 import 'package:delivery/pages/home/nearby_food_card.dart';
@@ -22,6 +23,12 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             NavBar(),
+            HeadTitle("Food Category"),
+            SizedBox(
+              width: double.infinity,
+              height: 40,
+              child: FoodCategoryList(),
+            ),
             //list of food category
             // FoodCategoryList(foodCategory, allFoodCategory,selectedFoodCategoryId),
             HeadTitle("Popular Items"),
@@ -31,20 +38,27 @@ class Home extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: 10),
               height: 315,
               child: StreamBuilder(
-                stream: FirebaseFirestore.instance.collection("Food")
-                    .snapshots(),
+                stream:
+                FirebaseFirestore.instance.collection("Food").snapshots(),
                 builder: (context, snapshots) {
                   if (snapshots.hasData) {
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: snapshots.data.docs.length,
                       itemBuilder: (context, index) {
-                        return FoodCard(foods, index);
+                        return FoodCard(
+                            Food(
+                            snapshots.data.docs[index]["foodID"],
+                            snapshots.data.docs[index]["foodName"],
+                            snapshots.data.docs[index]["description"],
+                            snapshots.data.docs[index]["price"],
+                            snapshots.data.docs[index]["rating"],
+                            snapshots.data.docs[index]["delivaryTime"],
+                            snapshots.data.docs[index]["pictureUrl"]), index);
                       },
                     );
-                  }
-                  else {
-                    return Text("no one");
+                  } else {
+                    return Text("Loading");
                   }
                 },
                 // child:
@@ -52,7 +66,9 @@ class Home extends StatelessWidget {
             ),
             HeadTitle("Near By"),
             NearByFoodCard(foods, 0),
-            SizedBox(height: 80,),
+            SizedBox(
+              height: 80,
+            ),
           ],
         ),
       ),
