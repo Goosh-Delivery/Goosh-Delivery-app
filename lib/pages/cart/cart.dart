@@ -1,13 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery/main.dart';
 import 'package:delivery/pages/cart/cart_food_card.dart';
-import 'package:delivery/pages/common/head_title.dart';
 import 'package:delivery/models/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:delivery/pages/common/theme.dart';
 import 'package:line_icons/line_icons.dart';
 
-class CartView extends StatelessWidget {
+class CartView extends StatefulWidget {
+  @override
+  _CartViewState createState() => _CartViewState();
+}
+
+class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     final carts = Cart.fetchFoodCart(1);
@@ -23,8 +26,8 @@ class CartView extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(
                   left: 20,
-                  top: 20,
-                  bottom: 20,
+                  top: 15,
+                  bottom: 15,
                 ),
                 child: Stack(
                   alignment: FractionalOffset.topLeft,
@@ -43,7 +46,12 @@ class CartView extends StatelessWidget {
                       padding: EdgeInsets.only(bottom: 5),
                       child: Text(
                         "Cart",
-                        style: AppBarTextStyle,
+                        style: TextStyle(
+                          fontFamily: FontNameDefault,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 26,
+                          color: textColor,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     )
@@ -52,7 +60,7 @@ class CartView extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Color(0xffecebeb),
@@ -65,33 +73,22 @@ class CartView extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.zero,
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        height: 270,
-                        child: StreamBuilder(
-                          stream: FirebaseFirestore.instance
-                              .collection("Cart")
-                              .snapshots(),
-                          builder: (context, snapshots) {
-                            if (snapshots.hasData) {
-                              return ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                itemCount: snapshots.data.docs.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      CartFoodCard(carts[index]),
-                                    ],
-                                  );
-                                },
-                              );
-                            } else
-                              return Text("Loading");
+                        height: 250,
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: carts.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                CartFoodCard(carts[index]),
+                              ],
+                            );
                           },
-                          // child:
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 0),
                         child: Column(
                           children: [
                             Row(
@@ -164,7 +161,40 @@ class CartView extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          _payment(context);
+                        },
+                        child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Check out",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            )),
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    side: BorderSide(color: secondaryColor))),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                secondaryColor),
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            padding:
+                                MaterialStateProperty.all<EdgeInsetsGeometry>(
+                                    EdgeInsets.symmetric(
+                              vertical: 18,
+                              horizontal: 100,
+                            ))),
+                      ),
                     ],
                   ),
                 ),
@@ -176,8 +206,8 @@ class CartView extends StatelessWidget {
     );
   }
 
-  _goToFoodDetail(BuildContext context, int foodId) {
-    Navigator.pushNamed(context, MealDetailRoute, arguments: {"id": foodId});
+  _payment(BuildContext context) {
+    Navigator.pushNamed(context, PaymentRoute);
   }
 
   _returnHome(BuildContext context) {

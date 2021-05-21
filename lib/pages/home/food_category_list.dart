@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery/models/food_category.dart';
-import 'package:delivery/pages/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:delivery/pages/common/theme.dart';

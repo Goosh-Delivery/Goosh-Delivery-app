@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:delivery/pages/checkout/checkout.dart';
 import 'package:floating_navbar/floating_navbar.dart';
 import 'package:floating_navbar/floating_navbar_item.dart';
 import 'package:line_icons/line_icons.dart';
@@ -11,16 +11,15 @@ import 'package:delivery/pages/cart/cart.dart';
 import 'package:delivery/pages/profile/profile.dart';
 
 import 'package:delivery/pages/meal_detail/meal_detail.dart';
+import 'package:delivery/pages/payment/payment.dart';
 
 const HomeRoute = "/";
+const cartRoute = "/cart";
 const MealDetailRoute = "/meal_detail";
+const PaymentRoute = "/payment";
+const checkOutRoute = "/checkout";
 
-void main() async {
-
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-
-  // FirebaseApp defaultApp = await Firebase.initializeApp();
+void main() {
   runApp(MyApp());
 }
 
@@ -29,7 +28,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
         title: 'Goosh Foods',
         onGenerateRoute: _routes(),
         theme: ThemeData(
@@ -45,7 +43,7 @@ class MyApp extends StatelessWidget {
               selectedIconColor: secondaryColor,
               hapticFeedback: false,
               showTitle: true,
-              horizontalPadding: 50,
+              horizontalPadding: 20,
               cardWidth: 100,
               items: [
                 FloatingNavBarItem(
@@ -81,7 +79,15 @@ class MyApp extends StatelessWidget {
         case MealDetailRoute:
           screen = MealDetail(arguments['id']);
           break;
-
+        case PaymentRoute:
+          screen = Payment();
+          break;
+        case checkOutRoute:
+          screen = CheckOut();
+          break;
+        case cartRoute:
+          screen = CartView();
+          break;
         default:
           return null;
       }
