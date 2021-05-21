@@ -26,6 +26,9 @@ dependencies:
   floating_navbar: ^2.0.1
   line_icons: ^2.0.0
   ff_navigation_bar: ^0.1.4
+  firebase_core: ^1.2.0
+  cloud_firestore: ^2.2.0
+
 
 dev_dependencies:
   flutter_test:
