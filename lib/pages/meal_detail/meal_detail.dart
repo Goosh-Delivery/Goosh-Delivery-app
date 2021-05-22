@@ -113,6 +113,7 @@ class MealDetail extends StatelessWidget {
                                     ),
                                     child: IconButton(
                                       onPressed: () {
+                                        _returnHome(context);
                                         FirebaseFirestore.instance
                                             .collection("Cart")
                                             .where("cart_id",
