@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery/main.dart';
 import 'package:flutter/material.dart';
 import 'package:delivery/models/food.dart';
@@ -6,7 +7,6 @@ import 'package:delivery/pages/common/theme.dart';
 class FoodCard extends StatefulWidget {
   final Food _food;
   final int _index;
-
 
   FoodCard(this._food, this._index);
 
@@ -39,9 +39,9 @@ class _FoodCardState extends State<FoodCard> {
                   borderRadius: BorderRadius.circular(50),
                   child: Image.network(
                     widget._food.pictureUrl,
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent loadingProgress) {
                       if (loadingProgress == null) return child;
@@ -128,10 +128,24 @@ class _FoodCardState extends State<FoodCard> {
             left: 32,
             child: TextButton(
               onPressed: () {
-                setState(() {
-                  this.cartText = "added";
-                });
-
+                FirebaseFirestore.instance
+                    .collection("Cart")
+                    .get()
+                    .then((value) {});
+                if (this.cartText != "added")
+                  FirebaseFirestore.instance.collection("Cart").add({
+                    "cart_id": 3,
+                    "amount": 1,
+                    "foodID": widget._food.foodId,
+                    "foodName": widget._food.foodName,
+                    "foodPictureUrl": widget._food.pictureUrl,
+                    "price": widget._food.price
+                  }).then((value) {
+                    print("added to cart");
+                    setState(() {
+                      this.cartText = "added";
+                    });
+                  });
                 // _goToFoodDetail(context, widget._food.foodId);
               },
               child: Text(cartText),
@@ -158,5 +172,8 @@ class _FoodCardState extends State<FoodCard> {
 
   _goToFoodDetail(BuildContext context, int foodId) {
     Navigator.pushNamed(context, MealDetailRoute, arguments: {"id": foodId});
+  }
+  _returnHome(BuildContext context) {
+    Navigator.pushNamed(context, HomeRoute);
   }
 }

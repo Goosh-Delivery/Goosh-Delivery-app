@@ -9,7 +9,11 @@ class NumericStepAmountButton extends StatefulWidget {
   final ValueChanged<int> onChanged;
 
   NumericStepAmountButton(
-      {Key key, this.minValue = 0, this.maxValue = 10,  this.amount = 1, this.onChanged})
+      {Key key,
+      this.minValue = 0,
+      this.maxValue = 10,
+      this.amount = 1,
+      this.onChanged})
       : super(key: key);
 
   @override
@@ -19,11 +23,9 @@ class NumericStepAmountButton extends StatefulWidget {
 }
 
 class _NumericStepButtonState extends State<NumericStepAmountButton> {
-
-
   @override
   Widget build(BuildContext context) {
-    int counter = widget.amount != null ? widget.amount: 0;
+    int counter = widget.amount != null ? widget.amount : 0;
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -33,24 +35,24 @@ class _NumericStepButtonState extends State<NumericStepAmountButton> {
             height: 30,
             decoration: BoxDecoration(
               color: secondaryColor,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15), topRight: Radius.circular(15)),
             ),
             padding: EdgeInsets.zero,
             child: IconButton(
               padding: EdgeInsets.all(3),
               icon: Icon(
                 LineIcons.plus,
-                color: Colors.white,
+                color: secondaryColor,
               ),
               // padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 18.0),
               iconSize: 20.0,
               color: Theme.of(context).primaryColor,
               onPressed: () {
                 setState(() {
-                  if (counter < widget.maxValue) {
-                    counter++;
-                  }
-                  widget.onChanged(counter);
+                  // this is also going to be set later on the development
+                  // it will adjust the plus sign of the
+                  // adding a an item amount of a cart element
                 });
               },
             ),
@@ -73,23 +75,22 @@ class _NumericStepButtonState extends State<NumericStepAmountButton> {
             height: 30,
             decoration: BoxDecoration(
               color: secondaryColor,
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15)),
             ),
             child: IconButton(
               padding: EdgeInsets.all(3),
               icon: Icon(
                 LineIcons.minus,
-                color: Colors.white,
+                color: secondaryColor,
               ),
               iconSize: 20.0,
               color: Theme.of(context).primaryColor,
               onPressed: () {
-                setState(() {
-                  if (counter > widget.minValue) {
-                    counter--;
-                  }
-                  widget.onChanged(counter);
-                });
+                // you will do sth later on the road for the better
+                // it will be used to update the cart num amount and
+                // we will be able to adjust the call.
               },
             ),
           ),

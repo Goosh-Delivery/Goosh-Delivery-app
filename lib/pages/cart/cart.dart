@@ -18,7 +18,7 @@ class _CartViewState extends State<CartView> {
     // final carts = Cart.fetchFoodCart(1);
     // user id
     final uid = "12";
-
+    double price = 0;
     return SafeArea(
       child: SingleChildScrollView(
         child: Container(
@@ -81,6 +81,7 @@ class _CartViewState extends State<CartView> {
                         child: StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection("Cart")
+                                .where("cart_id", isEqualTo: 3)
                                 .snapshots(),
                             builder: (context, snapshots) {
                               if (snapshots.hasData) {
@@ -88,21 +89,27 @@ class _CartViewState extends State<CartView> {
                                   scrollDirection: Axis.vertical,
                                   itemCount: snapshots.data.docs.length,
                                   itemBuilder: (context, index) {
+                                    price += (snapshots.data.docs[index]
+                                            ["price"]) *
+                                        snapshots.data.docs[index]["amount"];
                                     return Column(
                                       children: [
-                                        CartFoodCard(
-                                          CartItem(
-                                            snapshots.data.docs[index]
-                                                ["foodID"],
-                                            snapshots.data.docs[index]
-                                                ["foodName"],
-                                            snapshots.data.docs[index]["price"],
-                                            snapshots.data.docs[index]
-                                                ["amount"],
-                                            snapshots.data.docs[index]
-                                                ["foodPictureUrl"],
-                                          ),
-                                        ),
+                                        (() {
+                                          return CartFoodCard(
+                                            CartItem(
+                                              snapshots.data.docs[index]
+                                                  ["foodID"],
+                                              snapshots.data.docs[index]
+                                                  ["foodName"],
+                                              snapshots.data.docs[index]
+                                                  ["price"],
+                                              snapshots.data.docs[index]
+                                                  ["amount"],
+                                              snapshots.data.docs[index]
+                                                  ["foodPictureUrl"],
+                                            ),
+                                          );
+                                        })(),
                                       ],
                                     );
                                   },
@@ -129,7 +136,7 @@ class _CartViewState extends State<CartView> {
                                   ),
                                 ),
                                 Text(
-                                  "270 ETB",
+                                  "90 ETB",
                                   style: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 16,
@@ -151,7 +158,7 @@ class _CartViewState extends State<CartView> {
                                   ),
                                 ),
                                 Text(
-                                  "50 ETB",
+                                  "${189} ETB",
                                   style: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 16,
@@ -177,7 +184,7 @@ class _CartViewState extends State<CartView> {
                                   ),
                                 ),
                                 Text(
-                                  "320 ETB",
+                                  "220 ETB",
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w700,

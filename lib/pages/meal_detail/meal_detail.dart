@@ -25,10 +25,12 @@ class MealDetail extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             color: Colors.white,
             child: StreamBuilder(
-              stream: FirebaseFirestore.instance.collection("Food").where("foodID" , isEqualTo: this._id).snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection("Food")
+                  .where("foodID", isEqualTo: this._id)
+                  .snapshots(),
               builder: (context, snapshots) {
                 if (snapshots.hasData) {
-
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -84,6 +86,19 @@ class MealDetail extends StatelessWidget {
                                       minValue: 1,
                                       maxValue: 20,
                                       onChanged: (value) {
+                                        FirebaseFirestore.instance
+                                            .collection('Cart')
+                                            .where('cat_id', isEqualTo: 3)
+                                            .where("foodID",
+                                                isEqualTo: this._id)
+                                            .get()
+                                            .then((querySnapshot) {
+                                          querySnapshot.docs
+                                              .forEach((documentSnapshot) {
+                                            documentSnapshot.reference.update(
+                                                {"amount": foodNumber + 1});
+                                          });
+                                        });
                                         foodNumber += 1;
                                       },
                                     ),
@@ -97,7 +112,24 @@ class MealDetail extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        FirebaseFirestore.instance
+                                            .collection("Cart")
+                                            .where("cart_id",
+                                                isEqualTo: "3 ")
+                                            .get()
+                                            .then((value) {
+                                          value.docs.forEach((element) {
+                                            FirebaseFirestore.instance
+                                                .collection("Cart")
+                                                .doc(element.id)
+                                                .delete()
+                                                .then((value) {
+                                              print("Success!");
+                                            });
+                                          });
+                                        });
+                                      },
                                       icon: Icon(
                                         LineIcons.trash,
                                         color: secondaryColor,

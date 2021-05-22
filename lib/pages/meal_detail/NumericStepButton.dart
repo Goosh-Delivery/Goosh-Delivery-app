@@ -17,7 +17,7 @@ class NumericStepButton extends StatefulWidget {
 }
 
 class _NumericStepButtonState extends State<NumericStepButton> {
-  int counter = 0;
+  int counter = 1;
 
   @override
   Widget build(BuildContext context) {
