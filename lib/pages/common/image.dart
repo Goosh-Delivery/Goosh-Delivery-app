@@ -11,16 +11,17 @@ class ImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Stack(
+        alignment: Alignment.topLeft,
         children: [
           Align(
             alignment: Alignment(0, 0),
             child: Image.asset("assets/images/orange-half-circle.png",
-                width: _width, height: _height, fit: BoxFit.cover),
+                width: _width - 5, height: _height - 5, fit: BoxFit.cover),
           ),
           Align(
               alignment: Alignment(0, 0),
               child: Container(
-                margin: EdgeInsets.only(top: 5, left: 3),
+                margin: EdgeInsets.only(top: 2, left: 8),
                 width: _width - 15,
                 height: _height - 15,
                 decoration: BoxDecoration(
