@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery/main.dart';
+import 'package:delivery/pages/common/image.dart';
 import 'package:flutter/material.dart';
 import 'package:delivery/models/food.dart';
 import 'package:delivery/pages/common/theme.dart';
@@ -35,33 +36,28 @@ class _FoodCardState extends State<FoodCard> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.network(
-                    widget._food.pictureUrl,
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes
-                              : null,
-                        ),
-                      );
-                    },
-                  ),
-                  // Image.asset(
-                  //   _food.pictureUrl,
-                  //   width: 100,
-                  //   height: 100,
-                  //   fit: BoxFit.cover,
-                  // ),
-                ),
+                ImageView(widget._food.pictureUrl, 100, 100),
+                // ClipRRect(
+                //   borderRadius: BorderRadius.circular(50),
+                //   child: Image.network(
+                //     widget._food.pictureUrl,
+                //     width: 100,
+                //     height: 100,
+                //     fit: BoxFit.cover,
+                //     loadingBuilder: (BuildContext context, Widget child,
+                //         ImageChunkEvent loadingProgress) {
+                //       if (loadingProgress == null) return child;
+                //       return Center(
+                //         child: CircularProgressIndicator(
+                //           value: loadingProgress.expectedTotalBytes != null
+                //               ? loadingProgress.cumulativeBytesLoaded /
+                //                   loadingProgress.expectedTotalBytes
+                //               : null,
+                //         ),
+                //       );
+                //     },
+                //   ),
+                // ),
                 SizedBox(
                   height: 10,
                 ),
@@ -173,6 +169,7 @@ class _FoodCardState extends State<FoodCard> {
   _goToFoodDetail(BuildContext context, int foodId) {
     Navigator.pushNamed(context, MealDetailRoute, arguments: {"id": foodId});
   }
+
   _returnHome(BuildContext context) {
     Navigator.pushNamed(context, HomeRoute);
   }
