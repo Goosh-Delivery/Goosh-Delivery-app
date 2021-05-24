@@ -1,4 +1,5 @@
 import 'package:delivery/pages/checkout/checkout.dart';
+import 'package:delivery/pages/home/navbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:floating_navbar/floating_navbar.dart';
 import 'package:floating_navbar/floating_navbar_item.dart';
@@ -27,8 +28,27 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+
+  static List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    CartView(),
+    Profile(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -36,46 +56,107 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Goosh Foods',
-        onGenerateRoute: _routes(),
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+      debugShowCheckedModeBanner: false,
+      title: 'Goosh Foods',
+      onGenerateRoute: _routes(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: Scaffold(
+        backgroundColor: Color(0xf6f7f9),
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
         ),
-        home: Scaffold(
-          backgroundColor: bgColor,
-          body: SafeArea(
-            child: FloatingNavBar(
-              unselectedIconColor: Colors.white,
-              color: primaryColor,
-              selectedIconColor: secondaryColor,
-              hapticFeedback: false,
-              showTitle: true,
-              horizontalPadding: 20,
-              cardWidth: 100,
-              items: [
-                FloatingNavBarItem(
-                  iconData: LineIcons.home,
-                  title: 'Home',
-                  page: Home(),
+        bottomNavigationBar: SizedBox(
+          height: 75,
+          child: BottomNavigationBar(
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: (_selectedIndex == 0)
+                        ? primaryColor
+                        : Colors.transparent,
+                  ),
+                  child: Icon(
+                    Icons.home_outlined,
+                    color: (_selectedIndex == 0) ? Colors.white : primaryColor,
+                  ),
                 ),
-                FloatingNavBarItem(
-                  iconData: LineIcons.shoppingBag,
-                  title: 'Cart',
-                  page: CartView(),
+                label: ' ',
+              ),
+              BottomNavigationBarItem(
+                icon: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: (_selectedIndex == 1)
+                        ? primaryColor
+                        : Colors.transparent,
+                  ),
+                  child: Icon(
+                    Icons.shopping_bag_outlined,
+                    color: (_selectedIndex == 1) ? Colors.white : primaryColor,
+                  ),
                 ),
-                FloatingNavBarItem(
-                  iconData: LineIcons.user,
-                  title: 'My Profile',
-                  page: Profile(),
-                )
-              ],
-            ),
+                label: ' ',
+              ),
+              BottomNavigationBarItem(
+                icon: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: (_selectedIndex == 2)
+                        ? primaryColor
+                        : Colors.transparent,
+                  ),
+                  child: Icon(
+                    Icons.perm_identity_outlined,
+                    color: (_selectedIndex == 2) ? Colors.white : primaryColor,
+                  ),
+                ),
+                label: ' ',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Colors.amber[800],
+            onTap: _onItemTapped,
           ),
-        ));
+        ),
+        // body: SafeArea(
+        // child: FloatingNavBar(
+        // unselectedIconColor: Colors.white,
+        // color: Colors.white,
+        // selectedIconColor: secondaryColor,
+        // hapticFeedback: false,
+        // showTitle: false,
+        // horizontalPadding: 20,
+        // cardWidth: 100,
+        // items: [
+        // FloatingNavBarItem(
+        //   iconData: LineIcons.home,
+        //   title: '',
+        //   page: Home(),
+        // ),
+        // FloatingNavBarItem(
+        //   iconData: LineIcons.shoppingBag,
+        //   title: '',
+        //   page: CartView(),
+        // ),
+        // FloatingNavBarItem(
+        //   iconData: LineIcons.user,
+        //   title: '',
+        //   page: Profile(),
+        // )
+        // ],
+        // ),
+        // ),
+      ),
+    );
   }
 
   RouteFactory _routes() {
