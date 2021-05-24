@@ -23,7 +23,9 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             NavBar(),
+            SizedBox(height: 10),
             HeadTitle("Food Category"),
+            SizedBox(height: 10),
             SizedBox(
               width: double.infinity,
               height: 40,
@@ -31,6 +33,7 @@ class Home extends StatelessWidget {
             ),
             //list of food category
             // FoodCategoryList(foodCategory, allFoodCategory,selectedFoodCategoryId),
+            SizedBox(height: 10),
             HeadTitle("Popular Items"),
             //list of food category
             Container(
@@ -39,7 +42,7 @@ class Home extends StatelessWidget {
               height: 315,
               child: StreamBuilder(
                 stream:
-                FirebaseFirestore.instance.collection("Food").snapshots(),
+                    FirebaseFirestore.instance.collection("Food").snapshots(),
                 builder: (context, snapshots) {
                   if (snapshots.hasData) {
                     return ListView.builder(
@@ -48,13 +51,14 @@ class Home extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return FoodCard(
                             Food(
-                            snapshots.data.docs[index]["foodID"],
-                            snapshots.data.docs[index]["foodName"],
-                            snapshots.data.docs[index]["description"],
-                            snapshots.data.docs[index]["price"],
-                            snapshots.data.docs[index]["rating"],
-                            snapshots.data.docs[index]["delivaryTime"],
-                            snapshots.data.docs[index]["pictureUrl"]), index);
+                                snapshots.data.docs[index]["foodID"],
+                                snapshots.data.docs[index]["foodName"],
+                                snapshots.data.docs[index]["description"],
+                                snapshots.data.docs[index]["price"],
+                                snapshots.data.docs[index]["rating"],
+                                snapshots.data.docs[index]["delivaryTime"],
+                                snapshots.data.docs[index]["pictureUrl"]),
+                            index);
                       },
                     );
                   } else {
