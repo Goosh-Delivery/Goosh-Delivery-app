@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        backgroundColor: Color(0xf6f7f9),
+        backgroundColor: Colors.grey[100],
         body: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
@@ -123,6 +123,8 @@ class _MyAppState extends State<MyApp> {
               ),
             ],
             currentIndex: _selectedIndex,
+            backgroundColor: Colors.grey[100],
+            elevation: 0,
             selectedItemColor: Colors.amber[800],
             onTap: _onItemTapped,
           ),

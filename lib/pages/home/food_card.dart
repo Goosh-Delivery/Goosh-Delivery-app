@@ -142,11 +142,11 @@ class _FoodCardState extends State<FoodCard> {
                     "price": widget._food.price
                   }).then((value) {
                     print("added to cart");
-                    setState(() {
-                      this.cartText = "added";
-                    });
+                    // setState(() {
+                    //   this.cartText = "added";
+                    // });
+                    _goToFoodDetail(context, widget._food.foodId);
                   });
-                // _goToFoodDetail(context, widget._food.foodId);
               },
               child: Text(cartText),
               style: ButtonStyle(
@@ -173,6 +173,7 @@ class _FoodCardState extends State<FoodCard> {
   _goToFoodDetail(BuildContext context, int foodId) {
     Navigator.pushNamed(context, MealDetailRoute, arguments: {"id": foodId});
   }
+
   _returnHome(BuildContext context) {
     Navigator.pushNamed(context, HomeRoute);
   }
