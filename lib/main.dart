@@ -64,99 +64,101 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(
-        backgroundColor: Colors.grey[100],
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
-        bottomNavigationBar: SizedBox(
-          height: 75,
-          child: BottomNavigationBar(
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: (_selectedIndex == 0)
-                        ? primaryColor
-                        : Colors.transparent,
-                  ),
-                  child: Icon(
-                    Icons.home_outlined,
-                    color: (_selectedIndex == 0) ? Colors.white : primaryColor,
-                  ),
-                ),
-                label: ' ',
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: (_selectedIndex == 1)
-                        ? primaryColor
-                        : Colors.transparent,
-                  ),
-                  child: Icon(
-                    Icons.shopping_bag_outlined,
-                    color: (_selectedIndex == 1) ? Colors.white : primaryColor,
-                  ),
-                ),
-                label: ' ',
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: (_selectedIndex == 2)
-                        ? primaryColor
-                        : Colors.transparent,
-                  ),
-                  child: Icon(
-                    Icons.perm_identity_outlined,
-                    color: (_selectedIndex == 2) ? Colors.white : primaryColor,
-                  ),
-                ),
-                label: ' ',
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            backgroundColor: Colors.grey[100],
-            elevation: 0,
-            selectedItemColor: Colors.amber[800],
-            onTap: _onItemTapped,
+      home: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.grey[100],
+          body: Center(
+            child: _widgetOptions.elementAt(_selectedIndex),
           ),
+          bottomNavigationBar: SizedBox(
+            height: 75,
+            child: BottomNavigationBar(
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: (_selectedIndex == 0)
+                          ? primaryColor
+                          : Colors.transparent,
+                    ),
+                    child: Icon(
+                      LineIcons.home,
+                      color: (_selectedIndex == 0) ? Colors.white : primaryColor,
+                    ),
+                  ),
+                  label: ' ',
+                ),
+                BottomNavigationBarItem(
+                  icon: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: (_selectedIndex == 1)
+                          ? primaryColor
+                          : Colors.transparent,
+                    ),
+                    child: Icon(
+                      LineIcons.shoppingBag,
+                      color: (_selectedIndex == 1) ? Colors.white : primaryColor,
+                    ),
+                  ),
+                  label: ' ',
+                ),
+                BottomNavigationBarItem(
+                  icon: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: (_selectedIndex == 2)
+                          ? primaryColor
+                          : Colors.transparent,
+                    ),
+                    child: Icon(
+                      LineIcons.user,
+                      color: (_selectedIndex == 2) ? Colors.white : primaryColor,
+                    ),
+                  ),
+                  label: ' ',
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              backgroundColor: Colors.grey[100],
+              elevation: 0,
+              selectedItemColor: Colors.amber[800],
+              onTap: _onItemTapped,
+            ),
+          ),
+          // body: SafeArea(
+          // child: FloatingNavBar(
+          // unselectedIconColor: Colors.white,
+          // color: Colors.white,
+          // selectedIconColor: secondaryColor,
+          // hapticFeedback: false,
+          // showTitle: false,
+          // horizontalPadding: 20,
+          // cardWidth: 100,
+          // items: [
+          // FloatingNavBarItem(
+          //   iconData: LineIcons.home,
+          //   title: '',
+          //   page: Home(),
+          // ),
+          // FloatingNavBarItem(
+          //   iconData: LineIcons.shoppingBag,
+          //   title: '',
+          //   page: CartView(),
+          // ),
+          // FloatingNavBarItem(
+          //   iconData: LineIcons.user,
+          //   title: '',
+          //   page: Profile(),
+          // )
+          // ],
+          // ),
+          // ),
         ),
-        // body: SafeArea(
-        // child: FloatingNavBar(
-        // unselectedIconColor: Colors.white,
-        // color: Colors.white,
-        // selectedIconColor: secondaryColor,
-        // hapticFeedback: false,
-        // showTitle: false,
-        // horizontalPadding: 20,
-        // cardWidth: 100,
-        // items: [
-        // FloatingNavBarItem(
-        //   iconData: LineIcons.home,
-        //   title: '',
-        //   page: Home(),
-        // ),
-        // FloatingNavBarItem(
-        //   iconData: LineIcons.shoppingBag,
-        //   title: '',
-        //   page: CartView(),
-        // ),
-        // FloatingNavBarItem(
-        //   iconData: LineIcons.user,
-        //   title: '',
-        //   page: Profile(),
-        // )
-        // ],
-        // ),
-        // ),
       ),
     );
   }

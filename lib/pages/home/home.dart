@@ -23,9 +23,6 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             NavBar(),
-            SizedBox(height: 10),
-            HeadTitle("Food Category"),
-            SizedBox(height: 10),
             SizedBox(
               width: double.infinity,
               height: 40,
@@ -33,12 +30,12 @@ class Home extends StatelessWidget {
             ),
             //list of food category
             // FoodCategoryList(foodCategory, allFoodCategory,selectedFoodCategoryId),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             HeadTitle("Popular Items"),
             //list of food category
             Container(
               padding: EdgeInsets.zero,
-              margin: EdgeInsets.symmetric(vertical: 10),
+              margin: EdgeInsets.symmetric(vertical: 15),
               height: 315,
               child: StreamBuilder(
                 stream:

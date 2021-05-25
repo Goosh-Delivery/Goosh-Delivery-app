@@ -19,57 +19,54 @@ class _FoodCategoryListState extends State<FoodCategoryList> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection("FoodCategory").snapshots(),
-      builder: (context, snapshot) {
-        if(snapshot.hasData) {
-          return ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: snapshot.data.docs.length,
-            itemBuilder: (context, index) {
-              // Color selectedContainer =  _listFoodCategory[_selectedFoodCategoryId].name == _foodCategory[index] ?  grey: primaryColor;
-              Color selectedContainer = grey;
-              Color selectedText = Colors.black;
-              // Color selectedText =  _listFoodCategory[_selectedFoodCategoryId].name == _foodCategory[index] ?  Colors.black: Colors.white;
-              return InkWell(
-                onTap: () {
-                  print("Change Food Category");
-                },
-                child: Container(
-
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  margin: EdgeInsets.only(left: 20),
-                  decoration: BoxDecoration(
-                    color: selectedContainer,
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        LineIcons.utensils,
-                        color: selectedText,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        snapshot.data.docs[index]["name"],
-                        style: TextStyle(
+        stream:
+            FirebaseFirestore.instance.collection("FoodCategory").snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: snapshot.data.docs.length,
+              itemBuilder: (context, index) {
+                Color selectedContainer = grey;
+                Color selectedText = Colors.black;
+                return InkWell(
+                  onTap: () {
+                    print("Change Food Category");
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    margin: EdgeInsets.only(left: 20),
+                    decoration: BoxDecoration(
+                      color: selectedContainer,
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          LineIcons.utensils,
                           color: selectedText,
-                          fontSize: 16,
-                          fontFamily: "Tahoma",
                         ),
-                      )
-                    ],
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          snapshot.data.docs[index]["name"],
+                          style: TextStyle(
+                            color: selectedText,
+                            fontSize: 16,
+                            fontFamily: "Tahoma",
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              );
-              // return Text("category");
-            },
-          );
-        } else {
-          return Text("Loading");
-        }
-      }
-    );
+                );
+                // return Text("category");
+              },
+            );
+          } else {
+            return Text("Loading", textAlign: TextAlign.center,);
+          }
+        });
   }
 }

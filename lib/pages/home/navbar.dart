@@ -5,7 +5,7 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -14,7 +14,7 @@ class NavBar extends StatelessWidget {
             child: Image.asset(
               "assets/images/logo.png",
               fit: BoxFit.cover,
-              width: 90,
+              width: 100,
             ),
           ),
           Row(
