@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
             Container(
               padding: EdgeInsets.zero,
               margin: EdgeInsets.symmetric(vertical: 15),
-              height: 315,
+              height: 350,
               child: StreamBuilder(
                 stream:
                     FirebaseFirestore.instance.collection("Food").snapshots(),
@@ -65,10 +65,11 @@ class Home extends StatelessWidget {
                 // child:
               ),
             ),
+            SizedBox(height: 20,),
             HeadTitle("Near By"),
             NearByFoodCard(foods, 0),
             SizedBox(
-              height: 80,
+              height: 30,
             ),
           ],
         ),

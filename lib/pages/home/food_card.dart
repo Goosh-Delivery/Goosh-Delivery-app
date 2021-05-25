@@ -25,9 +25,9 @@ class _FoodCardState extends State<FoodCard> {
       child: Stack(
         children: [
           Container(
-            width: 220,
-            height: 295,
-            padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+            width: 240,
+            height: 330,
+            padding: EdgeInsets.only(top: 10, left: 20, right: 20),
             decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: shadowList,
@@ -36,7 +36,7 @@ class _FoodCardState extends State<FoodCard> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ImageView(widget._food.pictureUrl, 110, 110),
+                ImageView(widget._food.pictureUrl, 120, 120),
                 SizedBox(
                   height: 10,
                 ),
@@ -56,7 +56,7 @@ class _FoodCardState extends State<FoodCard> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,7 +94,8 @@ class _FoodCardState extends State<FoodCard> {
                       ],
                     ),
                   ],
-                )
+                ),
+                SizedBox(height: 20,)
               ],
             ),
           ),
@@ -135,7 +136,7 @@ class _FoodCardState extends State<FoodCard> {
                       MaterialStateProperty.all<Color>(Colors.white),
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                       EdgeInsets.symmetric(
-                    vertical: 10,
+                    vertical: 15,
                     horizontal: 40,
                   ))),
             ),

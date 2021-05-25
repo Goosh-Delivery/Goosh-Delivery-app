@@ -26,7 +26,7 @@ class NearByFoodCard extends StatelessWidget {
                   margin:
                       EdgeInsets.only(top: 10, left: 15, bottom: 5, right: 30),
                   padding: EdgeInsets.only(
-                      left: 105, top: 15, bottom: 25, right: 25),
+                      left: 150, top: 15, bottom: 25, right: 25),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: shadowList,
@@ -101,8 +101,8 @@ class NearByFoodCard extends StatelessWidget {
                   left: 0,
                   child: ImageView(
                       "https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-                      110,
-                      110),
+                      150,
+                      150),
                 ),
                 Positioned(
                   bottom: 0,
@@ -126,7 +126,7 @@ class NearByFoodCard extends StatelessWidget {
                             MaterialStateProperty.all<Color>(Colors.white),
                         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                             EdgeInsets.symmetric(
-                          vertical: 10,
+                          vertical: 12,
                           horizontal: 20,
                         ))),
                   ),
