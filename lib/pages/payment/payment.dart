@@ -47,6 +47,7 @@ class _PaymentState extends State<Payment> {
           ' ${_group[i].text}',
           style: TextStyle(
               color: _group[i].selected ? Colors.black : Colors.grey,
+              fontSize: 20,
               fontWeight:
               _group[i].selected ? FontWeight.bold : FontWeight.normal),
         ),
@@ -72,9 +73,9 @@ class _PaymentState extends State<Payment> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(
-                      left: 20,
-                      top: 15,
-                      bottom: 15,
+                      left: 25,
+                      top: 30,
+                      bottom: 23,
                     ),
                     child: Stack(
                       alignment: FractionalOffset.topLeft,
@@ -119,24 +120,29 @@ class _PaymentState extends State<Payment> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Text("Please Choose one of the options to pay", style: TextStyle(fontSize: 17, color: Colors.grey[500]),),
+                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                            child: Text("Please Choose one of the options to pay", style: TextStyle(fontSize: 17, color: Colors.grey[600]),),
                           ),
                           Column(
-                            children: <Widget>[makeRadioTiles()],
+                            children: [
+                              Padding(
+                               child: makeRadioTiles(),
+                                padding: EdgeInsets.only(left: 20, top: 20),
+                              )
+                            ],
                           ),
-                          SizedBox(height: 30,),
+                          SizedBox(height: 50,),
                           TextButton(
                             onPressed: () {
                               _checkOut(context);
                             },
                             child: Container(
-                                width: MediaQuery.of(context).size.width,
+                                width: 230,
                                 alignment: Alignment.center,
                                 child: Text(
                                   "Continue",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 18,
                                   ),
                                 )),
                             style: ButtonStyle(
@@ -153,7 +159,7 @@ class _PaymentState extends State<Payment> {
                                 MaterialStateProperty.all<EdgeInsetsGeometry>(
                                     EdgeInsets.symmetric(
                                       vertical: 18,
-                                      horizontal: 100,
+                                      horizontal: 20,
                                     ))),
                           ),
                         ],

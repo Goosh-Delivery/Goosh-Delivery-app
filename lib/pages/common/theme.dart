@@ -40,6 +40,13 @@ const BoldTextStyle = TextStyle(
   fontSize: BodyTextSize,
   color: Colors.black,
 );
+
+const DetailBoldText = TextStyle(
+  fontFamily: FontNameDefault,
+  fontWeight: FontWeight.w700,
+  fontSize: 24,
+  color: Colors.black,
+);
 const ButtonTextStyle = TextStyle(
   fontFamily: FontNameDefault,
   fontWeight: FontWeight.w300,

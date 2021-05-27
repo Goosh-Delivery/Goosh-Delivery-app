@@ -1,4 +1,5 @@
 import 'package:delivery/models/food.dart';
+import 'package:delivery/pages/common/image.dart';
 import 'package:delivery/pages/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -13,48 +14,27 @@ class FoodDetailCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Center(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(80),
-            child: Image.network(
-              _food.pictureUrl,
-              width: 140,
-              height: 140,
-              fit: BoxFit.cover,
-              loadingBuilder: (BuildContext context, Widget child,
-                  ImageChunkEvent loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Center(
-                  child: CircularProgressIndicator(
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                        loadingProgress.expectedTotalBytes
-                        : null,
-                  ),
-                );
-              },
-            ),
-          ),
+        child: ImageView(_food.pictureUrl, 150, 150),
         ),
         SizedBox(
           height: 25,
         ),
         Text(
           _food.foodName,
-          style: BoldTextStyle,
+          style: DetailBoldText,
         ),
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         Text(
           Food.trimText(_food.description, 120),
           textAlign: TextAlign.justify,
           style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey[600],
+            fontSize: 16,
           ),
         ),
         SizedBox(
-          height: 15,
+          height: 20,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,14 +44,14 @@ class FoodDetailCard extends StatelessWidget {
               children: [
                 Text(
                   "Price",
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                 ),
                 SizedBox(
                   height: 5,
                 ),
                 Text(
                   _food.price.toString(),
-                  style: BoldTextStyle,
+                  style: DetailBoldText,
                 )
               ],
             ),
@@ -80,14 +60,14 @@ class FoodDetailCard extends StatelessWidget {
               children: [
                 Text(
                   "Rating",
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                 ),
                 SizedBox(
                   height: 5,
                 ),
                 Text(
                   _food.rating.toString(),
-                  style: BoldTextStyle,
+                  style: DetailBoldText,
                 )
               ],
             ),
@@ -99,14 +79,14 @@ class FoodDetailCard extends StatelessWidget {
           children: [
             Text(
               "Delivery Time",
-              style: TextStyle(fontSize: 12, color: Colors.grey),
+              style: TextStyle(fontSize: 14, color: Colors.grey[700]),
             ),
             SizedBox(
               height: 5,
             ),
             Text(
               _food.delivaryTime.toString(),
-              style: BoldTextStyle,
+              style: DetailBoldText,
             )
           ],
         ),

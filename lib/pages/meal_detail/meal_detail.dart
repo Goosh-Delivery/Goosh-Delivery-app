@@ -56,7 +56,7 @@ class MealDetail extends StatelessWidget {
                               vertical: 30, horizontal: 50),
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
-                            color: Color(0xffecebeb),
+                            color: Colors.grey[200],
                             boxShadow: shadowList,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(40),
