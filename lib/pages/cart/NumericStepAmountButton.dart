@@ -32,7 +32,7 @@ class _NumericStepButtonState extends State<NumericStepAmountButton> {
         children: [
           Container(
             width: 25,
-            height: 30,
+            height: 20,
             decoration: BoxDecoration(
               color: secondaryColor,
               borderRadius: BorderRadius.only(

@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.grey[100],
+          backgroundColor: Colors.grey[200],
           body: Center(
             child: _widgetOptions.elementAt(_selectedIndex),
           ),
@@ -124,40 +124,13 @@ class _MyAppState extends State<MyApp> {
                 ),
               ],
               currentIndex: _selectedIndex,
-              backgroundColor: Colors.grey[100],
+              backgroundColor: Colors.grey[200],
               elevation: 0,
               selectedItemColor: Colors.amber[800],
               onTap: _onItemTapped,
             ),
           ),
-          // body: SafeArea(
-          // child: FloatingNavBar(
-          // unselectedIconColor: Colors.white,
-          // color: Colors.white,
-          // selectedIconColor: secondaryColor,
-          // hapticFeedback: false,
-          // showTitle: false,
-          // horizontalPadding: 20,
-          // cardWidth: 100,
-          // items: [
-          // FloatingNavBarItem(
-          //   iconData: LineIcons.home,
-          //   title: '',
-          //   page: Home(),
-          // ),
-          // FloatingNavBarItem(
-          //   iconData: LineIcons.shoppingBag,
-          //   title: '',
-          //   page: CartView(),
-          // ),
-          // FloatingNavBarItem(
-          //   iconData: LineIcons.user,
-          //   title: '',
-          //   page: Profile(),
-          // )
-          // ],
-          // ),
-          // ),
+
         ),
       ),
     );

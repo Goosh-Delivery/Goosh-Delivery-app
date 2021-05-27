@@ -65,7 +65,9 @@ class Home extends StatelessWidget {
                 // child:
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             HeadTitle("Near By"),
             NearByFoodCard(foods, 0),
             SizedBox(

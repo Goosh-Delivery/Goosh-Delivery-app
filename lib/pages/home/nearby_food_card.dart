@@ -26,7 +26,7 @@ class NearByFoodCard extends StatelessWidget {
                   margin:
                       EdgeInsets.only(top: 10, left: 15, bottom: 5, right: 30),
                   padding: EdgeInsets.only(
-                      left: 150, top: 15, bottom: 25, right: 25),
+                      left: 140, top: 15, bottom: 25, right: 25),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: shadowList,

@@ -21,7 +21,7 @@ class _FoodCardState extends State<FoodCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20),
+      margin: EdgeInsets.only(left: 20, right: 10),
       child: Stack(
         children: [
           Container(
@@ -101,7 +101,7 @@ class _FoodCardState extends State<FoodCard> {
           ),
           Positioned(
             bottom: 0,
-            left: 32,
+            left: 40,
             child: TextButton(
               onPressed: () {
                 FirebaseFirestore.instance
@@ -118,9 +118,6 @@ class _FoodCardState extends State<FoodCard> {
                     "price": widget._food.price
                   }).then((value) {
                     print("added to cart");
-                    // setState(() {
-                    //   this.cartText = "added";
-                    // });
                     _goToFoodDetail(context, widget._food.foodId);
                   });
               },

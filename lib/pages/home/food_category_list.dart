@@ -28,7 +28,7 @@ class _FoodCategoryListState extends State<FoodCategoryList> {
               itemCount: snapshot.data.docs.length,
               itemBuilder: (context, index) {
                 Color selectedContainer = grey;
-                Color selectedText = Colors.black;
+                Color selectedText = Colors.grey[800];
                 return InkWell(
                   onTap: () {
                     print("Change Food Category");
