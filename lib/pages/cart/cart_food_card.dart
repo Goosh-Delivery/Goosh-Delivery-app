@@ -30,7 +30,7 @@ class _CartFoodCardState extends State<CartFoodCard> {
             Align(
               alignment: Alignment(0, 0),
               child: Container(
-                width: 280,
+                width: 290,
                 height: 110,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -62,7 +62,7 @@ class _CartFoodCardState extends State<CartFoodCard> {
               child: ImageView(widget._cart.foodPictureUrl, 120, 120),
             ),
             Positioned(
-              right: 18,
+              right: 20,
               top: 15,
               child: (() {
                 this.cartAmount = widget._cart.amount;

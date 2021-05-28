@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery/main.dart';
 import 'package:delivery/models/cart_item.dart';
 import 'package:delivery/pages/cart/cart_food_card.dart';
-import 'package:delivery/models/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:delivery/pages/common/theme.dart';
 import 'package:line_icons/line_icons.dart';
@@ -68,7 +67,7 @@ class _CartViewState extends State<CartView> {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 25),
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
@@ -125,7 +124,7 @@ class _CartViewState extends State<CartView> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 15),
+                              horizontal: 10, vertical: 15),
                           child: Column(
                             children: [
                               Row(
