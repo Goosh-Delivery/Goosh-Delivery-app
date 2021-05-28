@@ -28,7 +28,7 @@ dependencies:
   ff_navigation_bar: ^0.1.4
   firebase_core: ^1.2.0
   cloud_firestore: ^2.2.0
-
+  splashscreen:
 
 dev_dependencies:
   flutter_test:
